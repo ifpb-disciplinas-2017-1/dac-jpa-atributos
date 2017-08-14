@@ -1,8 +1,11 @@
 package ifpb.ads.jpa.modelo;
 
+import ifpb.ads.jpa.infra.ConvertLocalDate;
 import java.io.Serializable;
+import java.time.LocalDate;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,6 +53,9 @@ public class Aluno implements Serializable {
             column = @Column(name = "cidade_pessoa", length = 100))
     private Endereco endereco;
 
+//    @Convert(converter = ConvertLocalDate.class)
+    private LocalDate dataDeNascimento;
+
     public Aluno() {
     }
 
@@ -57,6 +63,7 @@ public class Aluno implements Serializable {
         this.nome = nome;
         this.matricula = matricula;
         this.bolsa = bolsa;
+        this.dataDeNascimento = LocalDate.now();
     }
 
     public static Aluno of(String nome, String matricula, double bolsa) {
@@ -66,6 +73,10 @@ public class Aluno implements Serializable {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public LocalDate getDataDeNascimento() {
+        return dataDeNascimento;
     }
 
 }
